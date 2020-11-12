@@ -8,7 +8,7 @@ function App() {
   return (
     <BrowserRouter>
       <Navbar />
-      <div className="App pt-4">
+      <div className="container pt-4">
         <Switch>
           <Route path={'/'} exact component={Home} />
           <Route path={'/details'} component={Details} />
