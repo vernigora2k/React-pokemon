@@ -1,0 +1,1 @@
+export const urlPokemonsList = 'https://pokeapi.co/api/v2/pokemon'
