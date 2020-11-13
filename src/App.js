@@ -10,20 +10,32 @@ export const Context = React.createContext()
 function App() {
   const [state, setState] = useState({
     pokemonsList: [],
-    activePokemons: 'pikachu',
+    selectedPokemon: 'pikachu',
+    nextPage: null,
+    previousPage: null,
+    loading: true,
   })
 
   const initialUrl = 'https://pokeapi.co/api/pokemon'
 
   useEffect(() => {
-    console.log('sdfsdfsdfsdf')
     async function fetchData() {
-      let response = await getAllPokemons(initialUrl)
-      console.log('useEffect []')
-      await console.log(response)
+      // let response = await getAllPokemons(initialUrl)
+      const {next, previous, results} = await getAllPokemons(initialUrl)
+      await setState(prev => {
+        return {
+          ...prev,
+          nextPage: next,
+          previousPage: previous,
+          pokemonsList: results,
+        }
+      })
+      await console.log(state)
     }
     fetchData()
   }, [])
+
+  console.log(state)
 
 
   return (
