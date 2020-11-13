@@ -20,7 +20,7 @@ function App() {
     async function fetchData() {
       let response = await getAllPokemons(initialUrl)
       console.log('useEffect []')
-      console.log(response)
+      await console.log(response)
     }
     fetchData()
   }, [])

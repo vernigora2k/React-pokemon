@@ -9,7 +9,8 @@ import { urlPokemonsList } from "./config";
 // }
 
 export function getAllPokemons() {
-    apiRequest('GET', urlPokemonsList)
-        .then(data => {console.log(data)})
+    return apiRequest('GET', urlPokemonsList)
+        // .then(data => {console.log(data)})
+        .then()
         .catch(error => console.log(error))
 }
