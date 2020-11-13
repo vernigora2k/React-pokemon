@@ -3,7 +3,8 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { Home } from './pages/Home'
 import { Details } from './pages/Details'
 import { Navbar } from './components/Navbar';
-import { getAllPokemons } from './js/controller';
+import { getAllPokemons, getPokemon } from './js/controller';
+import { urlPokemonsList } from './js/config';
 
 export const Context = React.createContext()
 
@@ -16,12 +17,11 @@ function App() {
     loading: true,
   })
 
-  const initialUrl = 'https://pokeapi.co/api/pokemon'
 
   useEffect(() => {
     async function fetchData() {
       // let response = await getAllPokemons(initialUrl)
-      const {next, previous, results} = await getAllPokemons(initialUrl)
+      const {next, previous, results} = await getAllPokemons(urlPokemonsList)
       await setState(prev => {
         return {
           ...prev,
@@ -30,12 +30,24 @@ function App() {
           pokemonsList: results,
         }
       })
-      await console.log(state)
+      await loadPokemon(results)
     }
     fetchData()
   }, [])
 
   console.log(state)
+
+  const loadPokemon = async (data) => {
+    const pokemonsList = await Promise.all(data.map(async pokemon => {
+      return await getPokemon(pokemon.url)
+    }))
+    setState(prev => {
+      return {
+        ...state,
+        pokemonsList
+      }
+    })
+  }
 
 
   return (

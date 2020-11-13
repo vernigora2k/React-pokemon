@@ -13,7 +13,6 @@ export function apiRequest(method, url, urlencoded = null) {
 
     return fetch(url, requestOptions)
         .then(response => {
-            console.log(response)
             return response.json()
         })
         .catch(error => console.log(error))
