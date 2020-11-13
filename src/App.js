@@ -17,23 +17,22 @@ function App() {
     loading: true,
   })
 
+  async function fetchData() {
+    // let response = await getAllPokemons(initialUrl)
+    const {next, previous, results} = await getAllPokemons(urlPokemonsList)
+    await setState(prev => {
+      return {
+        ...prev,
+        nextPage: next,
+        previousPage: previous,
+        pokemonsList: results,
+        // loading: false,
+      }
+    })
+    await loadPokemon(results)
+  }
 
-  useEffect(() => {
-    async function fetchData() {
-      // let response = await getAllPokemons(initialUrl)
-      const {next, previous, results} = await getAllPokemons(urlPokemonsList)
-      await setState(prev => {
-        return {
-          ...prev,
-          nextPage: next,
-          previousPage: previous,
-          pokemonsList: results,
-        }
-      })
-      await loadPokemon(results)
-    }
-    fetchData()
-  }, [])
+  useEffect(fetchData, [])
 
   console.log(state)
 
@@ -47,6 +46,11 @@ function App() {
         pokemonsList
       }
     })
+  }
+
+
+  const getNext = async () => {
+
   }
 
 
