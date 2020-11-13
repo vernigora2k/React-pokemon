@@ -1,9 +1,10 @@
 import React, { Fragment, useContext } from 'react'
 import { Context } from '../App'
 import { FormSearch } from '../components/FormSearch'
+import PokemonsList from '../components/PokemonsList'
 
 export const Home = () => {
-    const { getNext, nextPage, getPrev, prevPage } = useContext(Context)
+    const { getNext, nextPage, getPrev, prevPage, pokemonsList } = useContext(Context)
 
     return (
         <Fragment>
@@ -15,6 +16,7 @@ export const Home = () => {
                 </div>
             </div>
             <FormSearch />
+            <PokemonsList />
         </Fragment>
     )
 }
