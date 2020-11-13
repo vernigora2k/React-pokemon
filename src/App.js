@@ -9,53 +9,43 @@ import { urlPokemonsList } from './js/config';
 export const Context = React.createContext()
 
 function App() {
-  const [state, setState] = useState({
-    pokemonsList: [],
-    selectedPokemon: 'pikachu',
-    nextPage: null,
-    previousPage: null,
-    loading: true,
-  })
+  const [nextPage, setNextPage] = useState(null)
+  const [prevPage, setPrevPage] = useState(null)
+  const [loading, setLoading] = useState(true)
+  const [pokemonsList, setPokemonsList] = useState([])
+  const [selectedPokemon, setSelectedPokemon] = useState('pikachu')
 
-  async function fetchData() {
-    // let response = await getAllPokemons(initialUrl)
-    const {next, previous, results} = await getAllPokemons(urlPokemonsList)
-    await setState(prev => {
-      return {
-        ...prev,
-        nextPage: next,
-        previousPage: previous,
-        pokemonsList: results,
-        // loading: false,
-      }
-    })
+
+  async function fetchData(url=urlPokemonsList) {
+    const {next, previous, results} = await getAllPokemons(url)
+    setNextPage(next)
+    setPrevPage(previous)
     await loadPokemon(results)
   }
-
-  useEffect(fetchData, [])
-
-  console.log(state)
 
   const loadPokemon = async (data) => {
     const pokemonsList = await Promise.all(data.map(async pokemon => {
       return await getPokemon(pokemon.url)
     }))
-    setState(prev => {
-      return {
-        ...state,
-        pokemonsList
-      }
-    })
+    setPokemonsList(pokemonsList)
+  }
+  
+  const getNext = async (nextPage) => {
+    fetchData(nextPage)
   }
 
-
-  const getNext = async () => {
-
+  const getPrev = async (prevPage) => {
+    fetchData(prevPage)
   }
 
+  
+  useEffect(fetchData, [])
+  
+  useEffect(() => console.log(pokemonsList), )
+  
 
   return (
-    <Context.Provider value={state}>
+    <Context.Provider value={{getNext, nextPage, getPrev, prevPage, pokemonsList}}>
       <BrowserRouter>
         <Navbar />
         <div className="container pt-4">

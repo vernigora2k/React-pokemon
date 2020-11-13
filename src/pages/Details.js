@@ -2,7 +2,7 @@ import React, { Fragment, useContext } from 'react'
 import { Context } from '../App'
 
 export const Details = () => {
-    const {selectedPokemon} = useContext(Context)
+    const { selectedPokemon } = useContext(Context)
 
     console.log(selectedPokemon)
     if (!selectedPokemon) return null
