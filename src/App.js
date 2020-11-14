@@ -50,8 +50,8 @@ function App() {
   }
  
   const selectPokemon = (pokemon) => {
-    console.log('selected pokemon')
     setSelectedPokemon(pokemon)
+    console.log(selectedPokemon)
   }
   
   useEffect(fetchData, [])

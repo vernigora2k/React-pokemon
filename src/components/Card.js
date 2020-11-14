@@ -6,8 +6,8 @@ import './card.scss'
 export default function Card(data) {
     const { goToDetails, selectPokemon } = useContext(Context)
     const { pokemon } = data
-    console.log(data)
-    console.log(pokemon)
+    // console.log(data)
+    // console.log(pokemon)
 
     return (
         <div 
@@ -17,7 +17,7 @@ export default function Card(data) {
             <img className="card-img-top mw-50" src={pokemon.sprites.front_default} alt="pokemon img" />
             <div className="card-body">
                 <h5 className="card-title">{pokemon.name}</h5>
-                <p className="card-text d-flex justify-content-around">
+                <div className="card-text d-flex justify-content-around">
                 {
                     pokemon.types.map((type,i) => {
                         return (
@@ -31,8 +31,8 @@ export default function Card(data) {
                         )
                     })
                 }
-                </p>
-                <p className="card-text d-flex">
+                </div>
+                <div className="card-text d-flex">
                     <strong>abilities:</strong>
                      {
                         pokemon.abilities.map((type,i) => {
@@ -43,7 +43,7 @@ export default function Card(data) {
                             )
                         })
                     }
-                </p>
+                </div>
                 <p className="card-text">
                     <small>base experience: {pokemon.base_experience}</small>
                 </p>
