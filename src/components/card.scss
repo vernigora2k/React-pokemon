@@ -8,3 +8,9 @@
     padding: 3px 8px;
     color: white;
 }
+
+.animated {
+    position: relative;
+    transition: .3s;
+    box-shadow: 10px 20px 20px rgba(184, 201, 238, 0.8);
+}

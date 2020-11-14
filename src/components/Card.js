@@ -8,7 +8,7 @@ export default function Card(data) {
     console.log(pokemon)
 
     return (
-        <div className="card mb-4 ml-2 mr-2 flex-grow-1">
+        <div className="card mb-4 ml-2 mr-2 flex-grow-1 animated">
             <img className="card-img-top mw-50" src={pokemon.sprites.front_default} alt="pokemon img" />
             <div className="card-body">
                 <h5 className="card-title">{pokemon.name}</h5>
@@ -18,7 +18,7 @@ export default function Card(data) {
                         return (
                             <div 
                                 className="pokemon__type"
-                                style={{backgroundColor: typeColors[type]}} 
+                                style={{backgroundColor: typeColors[type.type.name]}} 
                                 key={i}
                             >
                                 {type.type.name}

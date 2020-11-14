@@ -21,6 +21,7 @@ function App() {
     setNextPage(next)
     setPrevPage(previous)
     await loadPokemon(results)
+    setLoading(false)
   }
 
   const loadPokemon = async (data) => {
@@ -31,10 +32,12 @@ function App() {
   }
   
   const getNext = async (nextPage) => {
+    setLoading(true)
     fetchData(nextPage)
   }
 
   const getPrev = async (prevPage) => {
+    setLoading(true)
     fetchData(prevPage)
   }
 
@@ -42,10 +45,9 @@ function App() {
   useEffect(fetchData, [])
   
   // useEffect(() => console.log(pokemonsList), )
-  
 
   return (
-    <Context.Provider value={{getNext, nextPage, getPrev, prevPage, pokemonsList}}>
+    <Context.Provider value={{getNext, nextPage, getPrev, prevPage, pokemonsList, loading}}>
       <BrowserRouter>
         <Navbar />
         <div className="container pt-4">
