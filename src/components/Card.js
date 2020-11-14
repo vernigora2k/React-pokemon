@@ -1,14 +1,19 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import typeColors from '../aditianal/pokemonTypeColors'
+import { Context } from '../App'
 import './card.scss'
 
 export default function Card(data) {
-    const {pokemon} = data
+    const { goToDetails, selectPokemon } = useContext(Context)
+    const { pokemon } = data
     console.log(data)
     console.log(pokemon)
 
     return (
-        <div className="card mb-4 ml-2 mr-2 flex-grow-1 animated">
+        <div 
+            className="card mb-4 ml-2 mr-2 flex-grow-1 animated" 
+            onClick={() => {selectPokemon(data); goToDetails()}}
+        >
             <img className="card-img-top mw-50" src={pokemon.sprites.front_default} alt="pokemon img" />
             <div className="card-body">
                 <h5 className="card-title">{pokemon.name}</h5>

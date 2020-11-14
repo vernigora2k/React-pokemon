@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Redirect, Route, Switch, useHistory, withRouter } from 'react-router-dom';
+import { createBrowserHistory } from 'history'
 import { Home } from './pages/Home'
 import { Details } from './pages/Details'
 import { Navbar } from './components/Navbar';
@@ -12,8 +13,11 @@ function App() {
   const [nextPage, setNextPage] = useState(null)
   const [prevPage, setPrevPage] = useState(null)
   const [loading, setLoading] = useState(true)
+  const [redirectToDetails, setRedirectToDetails] = useState(false)
   const [pokemonsList, setPokemonsList] = useState([])
-  const [selectedPokemon, setSelectedPokemon] = useState('pikachu')
+  const [selectedPokemon, setSelectedPokemon] = useState(null)
+  // let history = useHistory()
+  const history = createBrowserHistory()
 
 
   async function fetchData(url=urlPokemonsList) {
@@ -41,13 +45,21 @@ function App() {
     fetchData(prevPage)
   }
 
+  const goToDetails = () => {
+    window.location.href = '/details'
+  }
+ 
+  const selectPokemon = (pokemon) => {
+    console.log('selected pokemon')
+    setSelectedPokemon(pokemon)
+  }
   
   useEffect(fetchData, [])
   
   // useEffect(() => console.log(pokemonsList), )
 
   return (
-    <Context.Provider value={{getNext, nextPage, getPrev, prevPage, pokemonsList, loading}}>
+    <Context.Provider value={{getNext, nextPage, getPrev, prevPage, pokemonsList, loading, goToDetails, selectedPokemon, selectPokemon}}>
       <BrowserRouter>
         <Navbar />
         <div className="container pt-4">
