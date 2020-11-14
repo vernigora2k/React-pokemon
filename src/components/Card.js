@@ -42,6 +42,9 @@ export default function Card(data) {
                 <p className="card-text">
                     <small>base experience: {pokemon.base_experience}</small>
                 </p>
+                <div className="hide-hover">
+                    click for details...
+                </div>
             </div>
         </div>
     )

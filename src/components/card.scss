@@ -14,3 +14,41 @@
     transition: .3s;
     box-shadow: 10px 20px 20px rgba(184, 201, 238, 0.8);
 }
+
+.animated:after {
+    position: absolute;
+    left: 20px;
+    right: 20px;
+    content: '';
+    display: block;
+    background: blue;
+    top: 20px;
+    bottom: 20px;
+    opacity: 0;
+    transform: rotate3d(-1,1,0,100deg);
+    transition: .4s;
+}
+
+.animated:hover:after {
+    opacity: .6;
+    transform: rotate3d(0,0,0,0deg);
+}
+
+.hide-hover {
+    position: absolute;
+    top: 50%;
+    // left: 25px;
+    font-size: 1.7rem;
+    opacity: 0;
+    z-index: 1;
+    transform: translate(10%, -30%);
+    transition: .3s;
+    text-align: center;
+    color: white;
+}
+
+.animated:hover .hide-hover {
+    opacity: 1;
+    transform: translate(0, -50%);
+    transition-delay: .3s;
+}
