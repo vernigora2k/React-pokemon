@@ -2,7 +2,7 @@ import React from 'react'
 
 export const FormSearch = () => {
     return (
-        <form>
+        <form className="ml-2 mr-2">
             <div className="form-group d-flex">
                 <input
                     className="form-control"

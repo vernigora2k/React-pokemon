@@ -41,7 +41,7 @@ function App() {
   
   useEffect(fetchData, [])
   
-  useEffect(() => console.log(pokemonsList), )
+  // useEffect(() => console.log(pokemonsList), )
   
 
   return (
