@@ -1,18 +1,20 @@
 import React, { useContext } from 'react'
+import { Link } from 'react-router-dom'
 import typeColors from '../aditianal/pokemonTypeColors'
 import { Context } from '../App'
 import './card.scss'
 
 export default function Card(data) {
-    const { goToDetails, selectPokemon } = useContext(Context)
+    const { goToDetails} = useContext(Context)
     const { pokemon } = data
     // console.log(data)
     // console.log(pokemon)
 
     return (
-        <div 
+        <Link
+            to="/details"
             className="card mb-4 ml-2 mr-2 flex-grow-1 animated" 
-            onClick={() => {selectPokemon(data); goToDetails()}}
+            onClick={() => {goToDetails(data)}}
         >
             <img className="card-img-top mw-50" src={pokemon.sprites.front_default} alt="pokemon img" />
             <div className="card-body">
@@ -51,6 +53,6 @@ export default function Card(data) {
                     click for details...
                 </div>
             </div>
-        </div>
+        </Link>
     )
 }

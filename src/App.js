@@ -13,12 +13,8 @@ function App() {
   const [nextPage, setNextPage] = useState(null)
   const [prevPage, setPrevPage] = useState(null)
   const [loading, setLoading] = useState(true)
-  const [redirectToDetails, setRedirectToDetails] = useState(false)
   const [pokemonsList, setPokemonsList] = useState([])
   const [selectedPokemon, setSelectedPokemon] = useState(null)
-  // let history = useHistory()
-  const history = createBrowserHistory()
-
 
   async function fetchData(url=urlPokemonsList) {
     const {next, previous, results} = await getAllPokemons(url)
@@ -45,13 +41,8 @@ function App() {
     fetchData(prevPage)
   }
 
-  const goToDetails = () => {
-    window.location.href = '/details'
-  }
- 
-  const selectPokemon = (pokemon) => {
+  const goToDetails = (pokemon) => {
     setSelectedPokemon(pokemon)
-    console.log(selectedPokemon)
   }
   
   useEffect(fetchData, [])
@@ -59,7 +50,7 @@ function App() {
   // useEffect(() => console.log(pokemonsList), )
 
   return (
-    <Context.Provider value={{getNext, nextPage, getPrev, prevPage, pokemonsList, loading, goToDetails, selectedPokemon, selectPokemon}}>
+    <Context.Provider value={{getNext, nextPage, getPrev, prevPage, pokemonsList, loading, goToDetails, selectedPokemon }}>
       <BrowserRouter>
         <Navbar />
         <div className="container pt-4">
