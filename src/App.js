@@ -15,8 +15,9 @@ function App() {
   const [loading, setLoading] = useState(true)
   const [pokemonsList, setPokemonsList] = useState([])
   const [selectedPokemon, setSelectedPokemon] = useState(null)
+  const [itemsPerPage, setItemsPerPage] = useState(10)
 
-  async function fetchData(url=urlPokemonsList) {
+  async function fetchData(url=urlPokemonsList + itemsPerPage) {
     const {next, previous, results} = await getAllPokemons(url)
     setNextPage(next)
     setPrevPage(previous)
@@ -44,13 +45,17 @@ function App() {
   const goToDetails = (pokemon) => {
     setSelectedPokemon(pokemon)
   }
+
+  const setItemPerPage = (item) => {
+    setItemsPerPage(item)
+  }
   
   useEffect(fetchData, [])
-  
-  // useEffect(() => console.log(pokemonsList), )
+
+  useEffect(fetchData, [itemsPerPage])
 
   return (
-    <Context.Provider value={{getNext, nextPage, getPrev, prevPage, pokemonsList, loading, goToDetails, selectedPokemon }}>
+    <Context.Provider value={{getNext, nextPage, getPrev, prevPage, pokemonsList, loading, goToDetails, selectedPokemon, setItemPerPage, itemsPerPage }}>
       <BrowserRouter>
         <Navbar />
         <div className="container pt-4">
