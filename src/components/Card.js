@@ -16,7 +16,7 @@ export default function Card(data) {
             className="card mb-4 ml-2 mr-2 flex-grow-1 animated" 
             onClick={() => {goToDetails(data)}}
         >
-            <img className="card-img-top mw-50" src={pokemon.sprites.front_default} alt="pokemon img" />
+            <img className="card-img-top mw-50 align-self-center" style={{maxWidth: "400px"}} src={pokemon.sprites.front_default} alt="pokemon img" />
             <div className="card-body">
                 <h5 className="card-title">{pokemon.name}</h5>
                 <div className="card-text d-flex justify-content-around">

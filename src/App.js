@@ -4,8 +4,8 @@ import { createBrowserHistory } from 'history'
 import { Home } from './pages/Home'
 import { Details } from './pages/Details'
 import { Navbar } from './components/Navbar';
-import { getAllPokemons, getPokemon } from './js/controller';
-import { urlPokemonsList } from './js/config';
+import { getPokemon } from './js/controller';
+import { urlPokemonsList, urlSearchPokemon } from './js/config';
 
 export const Context = React.createContext()
 
@@ -18,7 +18,7 @@ function App() {
   const [itemsPerPage, setItemsPerPage] = useState(10)
 
   async function fetchData(url=urlPokemonsList + itemsPerPage) {
-    const {next, previous, results} = await getAllPokemons(url)
+    const {next, previous, results} = await getPokemon(url)
     setNextPage(next)
     setPrevPage(previous)
     await loadPokemon(results)
@@ -49,13 +49,26 @@ function App() {
   const setItemPerPage = (item) => {
     setItemsPerPage(item)
   }
+
+  const searchPokemon = (pokemon) => {
+    if (!pokemon) {
+      fetchData()
+      return null
+    }
+    getPokemon(urlSearchPokemon + pokemon)
+    .then(res => {
+        if (res === undefined) throw new Error('some wrong!!!')
+        setPokemonsList([res])
+      })
+    .catch(err => console.log(err))
+  }
   
   useEffect(fetchData, [])
 
   useEffect(fetchData, [itemsPerPage])
 
   return (
-    <Context.Provider value={{getNext, nextPage, getPrev, prevPage, pokemonsList, loading, goToDetails, selectedPokemon, setItemPerPage, itemsPerPage }}>
+    <Context.Provider value={{getNext, nextPage, getPrev, prevPage, pokemonsList, loading, goToDetails, selectedPokemon, setItemPerPage, itemsPerPage, searchPokemon }}>
       <BrowserRouter>
         <Navbar />
         <div className="container pt-4">

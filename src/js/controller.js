@@ -8,13 +8,6 @@ import { apiRequest } from "./apiClient";
 //     apiRequest('GET', urlencoded)
 // }
 
-export function getAllPokemons(url) {
-    return apiRequest('GET', url)
-        // .then(data => {console.log(data)})
-        .then()
-        .catch(error => console.log(error))
-}
-
 export function getPokemon(url) {
     return apiRequest('GET', url)
         // .then(data => {console.log(data)})
