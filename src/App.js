@@ -5,7 +5,7 @@ import { Home } from './pages/Home'
 import { Details } from './pages/Details'
 import { Navbar } from './components/Navbar';
 import { getPokemon } from './js/controller';
-import { urlPokemonsList, urlSearchPokemon } from './js/config';
+import { urlPokemonsList, urlPokemonType, urlSearchPokemon } from './js/config';
 
 export const Context = React.createContext()
 
@@ -16,6 +16,7 @@ function App() {
   const [pokemonsList, setPokemonsList] = useState([])
   const [selectedPokemon, setSelectedPokemon] = useState(null)
   const [itemsPerPage, setItemsPerPage] = useState(10)
+  const [selectedTypes, setSelectedTypes] = useState([])
 
   async function fetchData(url=urlPokemonsList + itemsPerPage) {
     const {next, previous, results} = await getPokemon(url)
@@ -23,6 +24,16 @@ function App() {
     setPrevPage(previous)
     await loadPokemon(results)
     setLoading(false)
+  }
+
+  async function fetchDataMultiple(url=urlPokemonType) {
+    console.log('fetchDataMultiple')
+    console.log(selectedTypes)
+    const allSelectedPokemon = await Promise.all (selectedTypes.map(async type => {
+      console.log(type)
+      return await getPokemon(type.url)
+    }))
+    console.log(allSelectedPokemon)
   }
 
   const loadPokemon = async (data) => {
@@ -63,13 +74,20 @@ function App() {
       })
     .catch(err => console.log(err))
   }
+
+  const selectTypes = (types) => {
+    console.log(types)
+    setSelectedTypes(types)
+  }
   
   useEffect(fetchData, [])
 
   useEffect(fetchData, [itemsPerPage])
 
+  useEffect(() => fetchDataMultiple, [selectedTypes])
+
   return (
-    <Context.Provider value={{getNext, nextPage, getPrev, prevPage, pokemonsList, loading, goToDetails, selectedPokemon, setItemPerPage, itemsPerPage, searchPokemon }}>
+    <Context.Provider value={{getNext, nextPage, getPrev, prevPage, pokemonsList, loading, goToDetails, selectedPokemon, setItemPerPage, itemsPerPage, searchPokemon, selectTypes }}>
       <BrowserRouter>
         <Navbar />
         <div className="container pt-4">

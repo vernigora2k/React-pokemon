@@ -1,12 +1,8 @@
 import React, { Fragment, useContext } from 'react'
-import Select from 'react-select'
-import makeAnimated from 'react-select/animated'
-import { pokemonType } from '../aditianal/pokemonTypeOptions'
 import { Context } from '../App'
 import { FormSearch } from '../components/FormSearch'
 import PokemonsList from '../components/PokemonsList'
-
-const animatedComponents = makeAnimated()
+import SelectorMultiple from '../components/SeloctorMultiple'
 
 export const Home = () => {
     const { getNext, nextPage, getPrev, prevPage, pokemonsList, itemsPerPage, setItemPerPage } = useContext(Context)
@@ -16,13 +12,7 @@ export const Home = () => {
             <div className="d-flex justify-content-around mb-3">
                 <h1>Main page</h1>
                 <div style={{minWidth: "150px"}}>
-                    <Select
-                        closeMenuOnSelect={false}
-                        components={animatedComponents}
-                        defaultValue={[pokemonType[4], pokemonType[5]]}
-                        isMulti
-                        options={pokemonType}
-                    />
+                <SelectorMultiple />
                 </div>
                 <div className="d-flex align-items-center">
                     {prevPage && <button onClick={() => getPrev(prevPage)} className="btn btn-primary">prev</button>}
