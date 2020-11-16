@@ -56,7 +56,9 @@ function App() {
     console.log(newArray)
     let newLodashedArray = _.intersectionBy(...newArray, 'pokemon.name')
     console.log(newLodashedArray)
-    
+    let finalArray = newLodashedArray.map(item => item.pokemon)
+    console.log(finalArray)
+    await loadPokemon(finalArray)
 
 
     // console.log(intersection(['a', 'b', 'c'], ['b', 'c', 'e'], ['b', 'c', 'e']))
