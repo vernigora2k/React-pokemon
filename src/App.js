@@ -57,6 +57,7 @@ function App() {
     }
     getPokemon(urlSearchPokemon + pokemon)
     .then(res => {
+        console.log(res)
         if (res === undefined) throw new Error('some wrong!!!')
         setPokemonsList([res])
       })

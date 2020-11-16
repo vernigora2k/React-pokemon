@@ -6,7 +6,6 @@ import { Context } from '../App'
 export const Details = () => {
     const { selectedPokemon } = useContext(Context)
 
-    console.log(selectedPokemon)
     if (!selectedPokemon) return (
         <div className="alert alert-warning" role="alert">
             Firstly you have to select Pokemon!

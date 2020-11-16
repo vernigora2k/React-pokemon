@@ -1,0 +1,22 @@
+export const pokemonType = [
+    {value: "normal", label: "normal", url: "https://pokeapi.co/api/v2/type/1/"},
+    {value: "fighting", label: "fighting", url: "https://pokeapi.co/api/v2/type/2/"},
+    {value: "flying", label: "flying", url: "https://pokeapi.co/api/v2/type/3/"},
+    {value: "poison", label: "poison", url: "https://pokeapi.co/api/v2/type/4/"},
+    {value: "ground", label: "ground", url: "https://pokeapi.co/api/v2/type/5/"},
+    {value: "rock", label: "rock", url: "https://pokeapi.co/api/v2/type/6/"},
+    {value: "bug", label: "bug", url: "https://pokeapi.co/api/v2/type/7/"},
+    {value: "ghost", label: "ghost", url: "https://pokeapi.co/api/v2/type/8/"},
+    {value: "steel", label: "steel", url: "https://pokeapi.co/api/v2/type/9/"},
+    {value: "fire", label: "fire", url: "https://pokeapi.co/api/v2/type/10/"},
+    {value: "water", label: "water", url: "https://pokeapi.co/api/v2/type/11/"},
+    {value: "grass", label: "grass", url: "https://pokeapi.co/api/v2/type/12/"},
+    {value: "electric", label: "electric", url: "https://pokeapi.co/api/v2/type/13/"},
+    {value: "psychic", label: "psychic", url: "https://pokeapi.co/api/v2/type/14/"},
+    {value: "ice", label: "ice", url: "https://pokeapi.co/api/v2/type/15/"},
+    {value: "dragon", label: "dragon", url: "https://pokeapi.co/api/v2/type/16/"},
+    {value: "dark", label: "dark", url: "https://pokeapi.co/api/v2/type/17/"},
+    {value: "fairy", label: "fairy", url: "https://pokeapi.co/api/v2/type/18/"},
+    {value: "unknown", label: "unknown", url:"https://pokeapi.co/api/v2/type/10001/"},
+    {value: "shadow", label: "shadow", url: "https://pokeapi.co/api/v2/type/10002/"}
+]
