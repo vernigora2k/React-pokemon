@@ -7,6 +7,7 @@ import { Navbar } from './components/Navbar';
 import { getPokemon } from './js/controller';
 import { urlPokemonsList, urlPokemonType, urlSearchPokemon } from './js/config';
 
+// export const intersection = required('array-intersection')
 export const Context = React.createContext()
 
 function App() {
@@ -15,13 +16,18 @@ function App() {
   const [loading, setLoading] = useState(true)
   const [pokemonsList, setPokemonsList] = useState([])
   const [selectedPokemon, setSelectedPokemon] = useState(null)
+  const [allSelectedPokemon, setAllSelectedPokemon] = useState()
   const [itemsPerPage, setItemsPerPage] = useState(10)
   const [selectedTypes, setSelectedTypes] = useState([])
+
+  const intersection = require('array-intersection')
+  const _ = require('lodash')
 
   async function fetchData(url=urlPokemonsList + itemsPerPage) {
     const {next, previous, results} = await getPokemon(url)
     setNextPage(next)
     setPrevPage(previous)
+    console.log(results)
     await loadPokemon(results)
     setLoading(false)
   }
@@ -29,11 +35,47 @@ function App() {
   async function fetchDataMultiple(url=urlPokemonType) {
     console.log('fetchDataMultiple')
     console.log(selectedTypes)
-    const allSelectedPokemon = await Promise.all (selectedTypes.map(async type => {
-      console.log(type)
-      return await getPokemon(type.url)
-    }))
+    setAllSelectedPokemon(
+      await Promise.all (selectedTypes.map(async type => {
+        console.log(type)
+        return await getPokemon(type.url)
+      }))
+    )
+    // const allSelectedPokemon = await Promise.all (selectedTypes.map(async type => {
+    //   console.log(type)
+    //   return await getPokemon(type.url)
+    // }))
+
+    // console.log(allSelectedPokemon)
+  }
+
+  async function fetchDataMultipleIntersected() {
+    if (!allSelectedPokemon) return
     console.log(allSelectedPokemon)
+    let newArray = allSelectedPokemon.map(item => item.pokemon)
+    console.log(newArray)
+    let newLodashedArray = _.intersectionBy(...newArray, 'pokemon.name')
+    console.log(newLodashedArray)
+    
+
+
+    // console.log(intersection(['a', 'b', 'c'], ['b', 'c', 'e'], ['b', 'c', 'e']))
+    // let spredArray = allSelectedPokemon.map(el =>{
+    //     console.log(el)
+    //     el.pokemon.forEach(element => {
+    //       console.log(element.pokemon)
+
+    //       console.log(Object.values(element))
+    //       return element.pokemon
+          // const entries = new Map([
+          //   Object.values(element.pokemon)
+          // ])
+          // console.log(Object.fromEntries(entries))
+          
+      // })
+      
+    // })
+    // await console.log(spredArray)
   }
 
   const loadPokemon = async (data) => {
@@ -84,7 +126,9 @@ function App() {
 
   useEffect(fetchData, [itemsPerPage])
 
-  useEffect(() => fetchDataMultiple, [selectedTypes])
+  useEffect(() => fetchDataMultiple(selectedTypes), [selectedTypes])
+
+  useEffect(fetchDataMultipleIntersected, [allSelectedPokemon])
 
   return (
     <Context.Provider value={{getNext, nextPage, getPrev, prevPage, pokemonsList, loading, goToDetails, selectedPokemon, setItemPerPage, itemsPerPage, searchPokemon, selectTypes }}>
