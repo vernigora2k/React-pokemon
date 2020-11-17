@@ -2,7 +2,7 @@
   "name": "pokemons",
   "version": "1.2.6",
   "private": true,
-  "homepage": "https://vernigora2k.github.io/",
+  "homepage": "https://vernigora2k.github.io/React-pokemon/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.5",
     "@testing-library/react": "^11.1.2",
