@@ -9,9 +9,9 @@ export const Home = () => {
 
     return (
         <Fragment>
-            <div className="d-flex justify-content-around mb-3">
+            <div className="d-flex justify-content-around align-items-center mb-3">
                 <h1>Main page</h1>
-                <div style={{minWidth: "150px"}}>
+                <div style={{minWidth: "120px"}}>
                 <SelectorMultiple />
                 </div>
                 <div className="d-flex align-items-center">
