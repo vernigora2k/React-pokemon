@@ -7,8 +7,6 @@ import './card.scss'
 export default function Card(data) {
     const { goToDetails} = useContext(Context)
     const { pokemon } = data
-    // console.log(data)
-    // console.log(pokemon)
 
     return (
         <Link

@@ -7,8 +7,6 @@ export function apiRequest(method, url, urlencoded = null) {
         headers: headers,
         body: urlencoded,
         redirect: 'follow',
-        // credentials: 'include',
-        // mode: 'no-cors',
     }
 
     return fetch(url, requestOptions)

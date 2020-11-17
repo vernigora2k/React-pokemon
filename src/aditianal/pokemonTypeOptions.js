@@ -17,6 +17,5 @@ export const pokemonType = [
     {value: "dragon", label: "dragon", url: "https://pokeapi.co/api/v2/type/16/"},
     {value: "dark", label: "dark", url: "https://pokeapi.co/api/v2/type/17/"},
     {value: "fairy", label: "fairy", url: "https://pokeapi.co/api/v2/type/18/"},
-    {value: "unknown", label: "unknown", url:"https://pokeapi.co/api/v2/type/10001/"},
     {value: "shadow", label: "shadow", url: "https://pokeapi.co/api/v2/type/10002/"}
 ]

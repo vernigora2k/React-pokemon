@@ -5,7 +5,7 @@ import PokemonsList from '../components/PokemonsList'
 import SelectorMultiple from '../components/SeloctorMultiple'
 
 export const Home = () => {
-    const { getNext, nextPage, getPrev, prevPage, pokemonsList, itemsPerPage, setItemPerPage } = useContext(Context)
+    const { getNext, nextPage, getPrev, prevPage, selectedTypes, itemsPerPage, setItemPerPage } = useContext(Context)
 
     return (
         <Fragment>
@@ -16,8 +16,10 @@ export const Home = () => {
                 </div>
                 <div className="d-flex align-items-center">
                     {prevPage && <button onClick={() => getPrev(prevPage)} className="btn btn-primary">prev</button>}
-                    {nextPage && <button onClick={() => getNext(nextPage)} className="btn btn-success ml-2">next</button>}
-                    <div className="d-flex ml-3">
+                    { nextPage && selectedTypes.length > 0 
+                        ? <button onClick={() => getNext(nextPage)} className="btn btn-success ml-2" disabled>next</button> 
+                        : <button onClick={() => getNext(nextPage)} className="btn btn-success ml-2">next</button> }
+                    {!selectedTypes.length > 0 && <div className="d-flex ml-3">
                         <div style={{cursor: "pointer"}} onClick={() => setItemPerPage(10)}>
                             {itemsPerPage==10 ? <h2>10</h2> : <h3>10</h3>}
                         </div>
@@ -27,7 +29,7 @@ export const Home = () => {
                         <div style={{cursor: "pointer"}} className="ml-1" onClick={() => setItemPerPage(50)}>
                             {itemsPerPage==50 ? <h2>50</h2> : <h3>50</h3>}
                         </div>
-                    </div>
+                    </div>}
                 </div>
             </div>
             <FormSearch />

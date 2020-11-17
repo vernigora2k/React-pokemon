@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { NavLink } from 'react-router-dom'
 
 export const Navbar = () => (
@@ -6,7 +6,6 @@ export const Navbar = () => (
         <div className="navbar-brand">
             Pokemons app
         </div>
-
         <ul className="navbar-nav">
             <li className="nav-item">
                 <NavLink

@@ -11,12 +11,12 @@ export default function SelectorMultiple() {
         
     return (
         <Select
-        closeMenuOnSelect={false}
-        components={animatedComponents}
-        isMulti
-        options={pokemonType}
-        isSearchable
-        onChange={(types) => selectTypes(types)}
+            closeMenuOnSelect={false}
+            components={animatedComponents}
+            isMulti
+            options={pokemonType}
+            isSearchable
+            onChange={(types) => selectTypes(types)}
         />
     );
 }
